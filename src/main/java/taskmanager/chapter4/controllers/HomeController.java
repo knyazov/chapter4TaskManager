@@ -37,12 +37,6 @@ public class HomeController {
         return "details";
     }
 
-    @GetMapping(value = "/delete/{id}")
-    public String delete(@PathVariable Long id) {
-        db.deleteTask(id);
-        return "redirect:/";
-    }
-
     @PostMapping(value = "/details/{id}")
     public String edit(@PathVariable Long id,
                        @RequestParam(name = "tName", defaultValue = "") String name,
@@ -51,6 +45,12 @@ public class HomeController {
                        @RequestParam(name = "isCompleted", defaultValue = "") boolean isCompleted) {
         Task task = new Task(id, name, deadlineDate, description, isCompleted);
         db.updateTask(task);
+        return "redirect:/";
+    }
+
+    @GetMapping(value = "/delete/{id}")
+    public String delete(@PathVariable Long id) {
+        db.deleteTask(id);
         return "redirect:/";
     }
 }

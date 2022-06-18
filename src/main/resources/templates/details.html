@@ -12,13 +12,13 @@
         <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">TASK DESCRIPTION</label>
             <div class="col-sm-10">
-                <textarea name="tDescription" class="form-control" th:field="${task.description}"></textarea>
+                <textarea type="text" name="tDescription" class="form-control" th:text="${task.description}"/>
             </div>
         </div>
         <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">TASK DEADLINE DATE</label>
             <div class="col-sm-10">
-                <input type="date" class="form-control" name="sExam" th:value="${task.deadlineDate}">
+                <input type="date" class="form-control" name="tDeadlineDate" th:value="${task.deadlineDate}">
             </div>
         </div>
         <div class="mb-3 row">
@@ -31,11 +31,9 @@
             </div>
         </div>
         <div class="mb-3 row">
-            <div class="col-sm-10">
-                <button class="btn btn-primary">EDIT TASK</button>
-            </div>
-            <div class="col-sm-10 float-end">
-                <a class="btn btn-danger" th:href="@{'/delete/' + ${task.id}}">DELETE TASK</a>
+            <div class="col-sm-12">
+                <button type="submit" class="btn btn-primary">SAVE TASK</button>
+                <a class="btn btn-danger float-end" th:href="@{'/delete/' + ${task.id}}">DELETE TASK</a>
             </div>
         </div>
     </form>
