@@ -1,0 +1,74 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="/layout/main.html">
+<div layout:fragment="productsContent">
+    <div class="row">
+        <div class="col-sm-3">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                + ADD NEW TASK
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade modal-xl" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                 tabindex="-1"
+                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content p-3 mx-auto mt-3 mb-3">
+                        <form th:action="@{'/addTask'}" method="post">
+
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 col-form-label">TASK NAME</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="tName">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 col-form-label">TASK DESCRIPTION</label>
+                                <div class="col-sm-10">
+                                    <textarea name="tDescription" class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 col-form-label">TASK DEADLINE DATE</label>
+                                <div class="col-sm-10">
+                                    <input type="date" class="form-control" name="tDeadlineDate">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">ADD TASK</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>DEADLINE DATE</th>
+            <th>IS COMPLETED</th>
+            <th>DETAILS</th>
+        </tr>
+        </thead>
+        <tbody class="table-group-divider">`
+        <tr th:each="task : ${tasks}">
+            <td th:text="${task.id}"></td>
+            <td th:text="${task.name}"></td>
+            <td th:text="${task.deadlineDate}"></td>
+            <td th:text="${task.isCompleted}"></td>
+            <td><a th:href="@{'/details/'+ ${task.id}}" class="btn btn-primary">DETAILS</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</html>
